@@ -1,10 +1,11 @@
 package models;
 
 public class Book {
-    private String title;
-    private Integer id;
-    private String publishedYear;
-    private String writerName;
+    protected String title;
+    protected Integer id;
+    protected String publishedYear;
+    protected String writerName;
+    protected String bookCode;
     @Override
     public String toString() {
         return "Book{" +

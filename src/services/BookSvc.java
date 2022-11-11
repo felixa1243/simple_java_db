@@ -5,6 +5,7 @@ import repository.InventoryServiceImpl;
 import responses.Responses;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class BookSvc implements IBookServices {
     InventoryServiceImpl inventoryServiceImpl = new InventoryServiceImpl(new ArrayList<>());
@@ -15,13 +16,18 @@ public class BookSvc implements IBookServices {
     }
 
     @Override
-    public void deleteBook(Integer id) {
-        inventoryServiceImpl.delete(id);
+    public Responses deleteBook(Integer id) {
+        return inventoryServiceImpl.delete(id);
     }
 
     @Override
     public Book searchBookById(Integer id) {
         return inventoryServiceImpl.searchByid(id);
+    }
+
+    @Override
+    public List<Book> searchBookByTitle(String title) {
+        return inventoryServiceImpl.searchByTitle(title);
     }
 
     @Override

@@ -1,12 +1,14 @@
 package repository;
 
-import exceptions.Error;
 import models.Book;
-import responses.FailStatus;
 import responses.Responses;
 import responses.SuccessStatus;
+import utils.exceptions.EmptyListException;
+import utils.exceptions.ValidationException;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class InventoryServiceImpl implements InventoryService {
 
@@ -18,17 +20,17 @@ public class InventoryServiceImpl implements InventoryService {
 
     @Override
     public Responses pushBack(Book book) {
-       if(book.toString().isBlank()){
-           return new FailStatus("Name can't be blank",Error.EMPTY_NAME);
-       }
-       books.add(book);
-       return new SuccessStatus("Add book success");
+        if (book.toString().isBlank()) {
+            throw new ValidationException();
+        }
+        books.add(book);
+        return new SuccessStatus("Add book success");
     }
 
     @Override
     public Responses delete(Integer id) {
-        if(getAll() == null){
-            return new FailStatus("Empty List",Error.EMPTY_LIST);
+        if (getAll() == null) {
+            throw new ValidationException();
         }
         books.remove(id);
         return new SuccessStatus("Delete success");
@@ -36,17 +38,28 @@ public class InventoryServiceImpl implements InventoryService {
 
     @Override
     public Book searchByid(Integer id) {
-        if(id >= books.size()){
-            return null;
+        var results = books.stream().filter(book -> book.getId().equals(id)).collect(Collectors.toList());
+        if (results.size() < 1) {
+            throw new EmptyListException();
         }
-        return books.get(id);
+        return results.get(0);
     }
 
     @Override
     public ArrayList<Book> getAll() {
-        if(books.size() < 1){
+        if (books.size() < 1) {
             return null;
         }
         return books;
+    }
+
+    @Override
+    public List<Book> searchByTitle(String title) {
+
+        var results = books.stream().filter(book -> book.getTitle().toLowerCase().equals(title.toLowerCase())).collect(Collectors.toList());
+        if (results.size() < 0) {
+            throw new EmptyListException();
+        }
+        return results;
     }
 }

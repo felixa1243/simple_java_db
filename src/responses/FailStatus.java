@@ -1,6 +1,6 @@
 package responses;
 
-import exceptions.Error;
+import utils.exceptions.Error;
 
 public class FailStatus extends Responses {
     private Error error;

@@ -2,9 +2,14 @@ package models;
 
 public class Book {
     protected String title;
-    protected Integer id;
+    protected String id;
     protected String publishedYear;
     protected String writerName;
+
+    public String getWriterName() {
+        return writerName;
+    }
+
     protected String bookCode;
     @Override
     public String toString() {
@@ -22,11 +27,11 @@ public class Book {
         this.title = title;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -38,7 +43,7 @@ public class Book {
         this.publishedYear = publishedYear;
     }
 
-    public Book(String title, Integer id, String publishedYear,String writerName) {
+    public Book(String title, String id, String publishedYear, String writerName) {
         this.title = title;
         this.id = id;
         this.publishedYear = publishedYear;

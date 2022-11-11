@@ -3,7 +3,6 @@ package repository;
 import models.Book;
 import responses.Responses;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface InventoryService {
@@ -11,5 +10,5 @@ public interface InventoryService {
     Responses delete(Integer id);
     Book searchByid(Integer id);
     List<Book> searchByTitle(String title);
-    ArrayList<Book> getAll();
+    List<Book> getAll();
 }

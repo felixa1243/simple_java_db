@@ -7,7 +7,7 @@ import responses.Responses;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookSvc implements IBookServices {
+public class BookSvc implements IBookServices  {
     InventoryServiceImpl inventoryServiceImpl = new InventoryServiceImpl(new ArrayList<>());
 
     @Override
@@ -31,7 +31,7 @@ public class BookSvc implements IBookServices {
     }
 
     @Override
-    public ArrayList<Book> getAllBook() {
+    public List<Book> getAllBook() {
         return inventoryServiceImpl.getAll();
     }
 }

@@ -47,21 +47,8 @@ public class InventoryServiceImpl implements InventoryService {
         }
         books.add(book);
         try {
-//            var results = book.getTitle() +"||" +book.getId()+"||" + book.getPublishedYear()+"||" + book.getWriterName() + "\n";
-//            Files.write(file, results.getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file.toFile()),"UTF-8"));
-            StringBuffer line = new StringBuffer();
-            line.append(book.getTitle());
-            line.append("||");
-            line.append(book.getId());
-            line.append("||");
-            line.append(book.getPublishedYear());
-            line.append("||");
-            line.append(book.getWriterName());
-            bw.write(line.toString());
-            bw.newLine();
-            bw.flush();
-            bw.close();
+            var results = book.getTitle() +"||" +book.getId()+"||" + book.getPublishedYear()+"||" + book.getWriterName() + "\n";
+            Files.write(file, results.getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
         } catch (IOException err) {
             System.out.println(err.getMessage());
         }
@@ -90,13 +77,18 @@ public class InventoryServiceImpl implements InventoryService {
     @Override
     public List<Book> getAll() {
         List<Book> lines = null;
-        try (BufferedReader br = Files.newBufferedReader(file)) {
-            String line = br.readLine();
-            while (line != null) {
-                String[] attributes = line.split("||");
-                Book book1 = createBook(attributes);
-                lines.add(book1);
-            }
+//        try (BufferedReader br = Files.newBufferedReader(file)) {
+//            String line = br.readLine();
+//            while (line != null) {
+//                String[] attributes = line.split("\\|\\|");
+//                Book book1 = createBook(attributes);
+//                lines.add(book1);
+//            }
+        try{
+            lines = Files.lines(file).map(member->{
+                String [] arr = member.split("\\|\\|");
+                return new Book(arr[0],arr[1],arr[2],arr[3]);
+            }).collect(Collectors.toList());
         } catch (IOException err) {
             err.printStackTrace();
         }

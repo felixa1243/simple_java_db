@@ -1,22 +1,28 @@
 package models;
 
+import java.util.UUID;
+
 public class Book {
     protected String title;
     protected String id;
     protected String publishedYear;
     protected String writerName;
+    protected String bookCode;
+
+    public Book(String title, String publishedYear, String writerName) {
+        this.title = title;
+        this.id = UUID.randomUUID().toString();
+        this.publishedYear = publishedYear;
+        this.writerName = writerName;
+    }
 
     public String getWriterName() {
         return writerName;
     }
 
-    protected String bookCode;
     @Override
     public String toString() {
-        return "Book{" +
-                "title='" + title + '\'' +
-                ", id=" + id +
-                '}';
+        return "Book{" + "title='" + title + '\'' + ", id=" + id + '}';
     }
 
     public String getTitle() {
@@ -41,12 +47,5 @@ public class Book {
 
     public void setPublishedYear(String publishedYear) {
         this.publishedYear = publishedYear;
-    }
-
-    public Book(String title, String id, String publishedYear, String writerName) {
-        this.title = title;
-        this.id = id;
-        this.publishedYear = publishedYear;
-        this.writerName = writerName;
     }
 }

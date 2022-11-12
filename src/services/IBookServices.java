@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface IBookServices {
     Responses addBook(Book book);
-    Responses deleteBook(Integer id);
-    Book searchBookById(Integer id);
+    Responses deleteBook();
+    Book searchBookById(String id);
     List<Book> searchBookByTitle(String title);
     List<Book> getAllBook();
 }

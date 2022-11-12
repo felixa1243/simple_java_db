@@ -3,27 +3,23 @@ package models;
 import utils.generator.MakeBookCode;
 
 public class Novel extends Book implements MakeBookCode {
-    private int counter;
     public static int nextCounter = 1;
-    public Novel(String title, String id, String publishedYear, String writerName) {
-        super(title, id, publishedYear, writerName);
+    private final int counter;
+
+    public Novel(String title, String publishedYear, String writerName) {
+        super(title, publishedYear, writerName);
+        this.bookCode = generate(this);
         this.counter = nextCounter;
-        this.nextCounter++;
+        nextCounter++;
     }
 
     @Override
     public String toString() {
-        return "Novel{" +
-                "title='" + title + '\'' +
-                ", id=" + id +
-                ", publishedYear='" + publishedYear + '\'' +
-                ", writerName='" + writerName + '\'' +
-                ", bookCode='" + bookCode + '\'' +
-                '}';
+        return "Novel{" + "title='" + title + '\'' + ", id=" + id + ", publishedYear='" + publishedYear + '\'' + ", writerName='" + writerName + '\'' + ", bookCode='" + bookCode + '\'' + '}';
     }
 
     @Override
     public String generate(Book book) {
-        return this.getPublishedYear()+"-"+"A"+"-"+this.counter;
+        return this.getPublishedYear() + "-" + "A" + "-" + this.counter;
     }
 }

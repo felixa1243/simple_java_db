@@ -16,12 +16,12 @@ public class BookSvc implements IBookServices  {
     }
 
     @Override
-    public Responses deleteBook(Integer id) {
-        return inventoryServiceImpl.delete(id);
+    public Responses deleteBook() {
+        return inventoryServiceImpl.delete();
     }
 
     @Override
-    public Book searchBookById(Integer id) {
+    public Book searchBookById(String id) {
         return inventoryServiceImpl.searchByid(id);
     }
 

@@ -7,8 +7,12 @@ import java.util.List;
 
 public interface InventoryService {
     Responses pushBack(Book book);
-    Responses delete(Integer id);
-    Book searchByid(Integer id);
+
+    Responses delete();
+
+    Book searchByid(String id);
+
     List<Book> searchByTitle(String title);
+
     List<Book> getAll();
 }

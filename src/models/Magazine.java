@@ -5,13 +5,14 @@ import utils.generator.MakeBookCode;
 public class Magazine extends Book implements MakeBookCode {
     public static int nextCounter = 1;
     private Due due;
-    private final int counter;
+    private int counter;
 
     public Magazine(String title, String publishedYear, String writerName) {
         super(title, publishedYear, writerName);
-        this.bookCode = this.generate(this);
         this.counter = nextCounter;
         nextCounter++;
+        this.bookCode = generate(this);
+        this.type = "Magazine";
     }
 
     public Due getDue() {
@@ -25,7 +26,7 @@ public class Magazine extends Book implements MakeBookCode {
 
     @Override
     public String generate(Book book) {
-        return this.getPublishedYear() + "-" + "B" + "-" + this.counter;
+        return getPublishedYear() + "-" + "B" + "-" + this.counter;
     }
 
     @Override

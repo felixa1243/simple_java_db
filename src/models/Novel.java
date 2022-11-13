@@ -4,13 +4,14 @@ import utils.generator.MakeBookCode;
 
 public class Novel extends Book implements MakeBookCode {
     public static int nextCounter = 1;
-    private final int counter;
+    private int counter;
 
     public Novel(String title, String publishedYear, String writerName) {
         super(title, publishedYear, writerName);
-        this.bookCode = generate(this);
         this.counter = nextCounter;
         nextCounter++;
+        this.bookCode = generate(this);
+        this.type = "Novel";
     }
 
     @Override
